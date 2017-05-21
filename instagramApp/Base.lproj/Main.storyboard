@@ -132,5 +132,23 @@
             </objects>
             <point key="canvasLocation" x="789.60000000000002" y="133.5832083958021"/>
         </scene>
+        <!--UserVC-->
+        <scene sceneID="TEn-uI-I8Y">
+            <objects>
+                <viewController storyboardIdentifier="userVC" id="c2W-bJ-idx" customClass="UserVC" customModule="instagramApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H6Y-Fw-P0q"/>
+                        <viewControllerLayoutGuide type="bottom" id="UHc-Ou-2Un"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ko1-uJ-U2a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XHT-xG-deT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1448" y="132"/>
+        </scene>
     </scenes>
 </document>

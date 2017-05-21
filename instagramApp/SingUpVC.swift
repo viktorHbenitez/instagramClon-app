@@ -22,10 +22,24 @@ class SingUpVC: UIViewController {
     
     let picker = UIImagePickerController()
     
+    var userStorage : FIRStorageReference!
+    var ref : FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.picker.delegate = self
+        
+        // Create a root reference from Firebase storage
+        let storage = FIRStorage.storage().reference(forURL: "gs://instagramapp-5ac2d.appspot.com/")
+        
+        // create a child reference in the firebase storage
+        userStorage = storage.child("users")
+        
+        // child reference of the root from Firebase Database
+        ref = FIRDatabase.database().reference()
+
+        
 
     }
     
@@ -36,7 +50,6 @@ class SingUpVC: UIViewController {
         //set the picker configuration
         self.picker.allowsEditing = true
         self.picker.sourceType = .photoLibrary
-        
         
         present(picker, animated: true, completion: nil) //Presents a view controller modally.
 
@@ -51,12 +64,74 @@ class SingUpVC: UIViewController {
             passField.text != "",
             confirmPassField.text != "" else {return}
         
-        if passField == confirmPassField{
+        if passField.text == confirmPassField.text{
         
             // Create the user in Firebase
-            
-
-            
+            FIRAuth.auth()?.createUser(withEmail: emailField.text!, password: passField.text!, completion: { (user, error) in
+                
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+                
+                if let user = user{
+                    
+                    let changeRequest = FIRAuth.auth()!.currentUser!.profileChangeRequest()
+                    changeRequest.displayName = self.fullNameField.text!
+                    changeRequest.commitChanges(completion: nil)
+                    
+                    // 1. Create a child reference with the uid of the user
+                    let imageRef = self.userStorage.child("\(user.uid).jpg")
+                    
+                    // 2. Configure the data image
+                    let imageUpload = self.imageView.image!
+                    let imageData = UIImageJPEGRepresentation(imageUpload, 0.5)
+                    
+                    // Upload the data image with the child user.uid reference
+                    let uploadImageTask = imageRef.put(imageData!, metadata: nil, completion: { (metaData, error) in
+                        
+                        if let error = error{
+                            print(error.localizedDescription)
+                            return
+                        }
+                        
+                        // get the url of the image
+                        imageRef.downloadURL(completion: { (url, error) in
+                            
+                            if let error = error{
+                                print(error.localizedDescription)
+                                return
+                            }
+                            
+                            if let url = url{
+                                
+                                // CREATE THE USER
+                                
+                                // create a dictionary from the user values
+                                let userInfo : [String : Any] = ["uid" : user.uid,
+                                                                 "full-name" : self.fullNameField.text!,
+                                                                 "urlToImage" : url.absoluteString]
+                                
+                                // create a child reference where it will has the user info
+                                self.ref.child("users").child(user.uid).setValue(userInfo)
+                                
+                                
+                                // Call the VC when the user is created
+                                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userVC")
+                                
+                                self.present(vc, animated: true, completion: nil)
+                            }
+                            
+                            
+                        })
+                        
+                        
+                    })
+                    
+                    uploadImageTask.resume()
+                }
+                
+            })
+                        
         }else{
             print("VIKTOR : Password is not match")
         }

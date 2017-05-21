@@ -14,6 +14,7 @@
 		E4525ABE1ECFBF8C009315B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4525ABC1ECFBF8C009315B2 /* LaunchScreen.storyboard */; };
 		E4525AC61ECFC028009315B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4525AC51ECFC028009315B2 /* GoogleService-Info.plist */; };
 		E4525ACB1ECFC715009315B2 /* SingUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4525ACA1ECFC715009315B2 /* SingUpVC.swift */; };
+		E48571F11ED1109300F08486 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48571F01ED1109300F08486 /* UserVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E4525ABF1ECFBF8C009315B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4525AC51ECFC028009315B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4525ACA1ECFC715009315B2 /* SingUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpVC.swift; sourceTree = "<group>"; };
+		E48571F01ED1109300F08486 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		FB623F785319EB34F50F94D5 /* Pods-instagramApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instagramApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-instagramApp/Pods-instagramApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				E4525ACA1ECFC715009315B2 /* SingUpVC.swift */,
+				E48571F01ED1109300F08486 /* UserVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4525ACB1ECFC715009315B2 /* SingUpVC.swift in Sources */,
+				E48571F11ED1109300F08486 /* UserVC.swift in Sources */,
 				E4525AB41ECFBF8C009315B2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
