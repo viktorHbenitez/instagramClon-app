@@ -15,6 +15,7 @@
 		E4525AC61ECFC028009315B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4525AC51ECFC028009315B2 /* GoogleService-Info.plist */; };
 		E4525ACB1ECFC715009315B2 /* SingUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4525ACA1ECFC715009315B2 /* SingUpVC.swift */; };
 		E48571F11ED1109300F08486 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48571F01ED1109300F08486 /* UserVC.swift */; };
+		E4E22B991ED2A60400A3DF5A /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E22B981ED2A60400A3DF5A /* SignInVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		E4525AC51ECFC028009315B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4525ACA1ECFC715009315B2 /* SingUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingUpVC.swift; sourceTree = "<group>"; };
 		E48571F01ED1109300F08486 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
+		E4E22B981ED2A60400A3DF5A /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		FB623F785319EB34F50F94D5 /* Pods-instagramApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instagramApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-instagramApp/Pods-instagramApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 			children = (
 				E4525ACA1ECFC715009315B2 /* SingUpVC.swift */,
 				E48571F01ED1109300F08486 /* UserVC.swift */,
+				E4E22B981ED2A60400A3DF5A /* SignInVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 			files = (
 				E4525ACB1ECFC715009315B2 /* SingUpVC.swift in Sources */,
 				E48571F11ED1109300F08486 /* UserVC.swift in Sources */,
+				E4E22B991ED2A60400A3DF5A /* SignInVC.swift in Sources */,
 				E4525AB41ECFBF8C009315B2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
