@@ -7,29 +7,114 @@
 //
 
 import UIKit
+import Firebase
 
 class UserVC: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var containerUsers = [User]()
+    
+    let identifierCell = "Cell"
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        retrieveUsersFromFirebase()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    
+    func retrieveUsersFromFirebase() {
+        
+        // Create a root reference from Firebase Database
+        let ref = FIRDatabase.database().reference()
+        
+        // retrieve the user of the child reference
+        ref.child("users").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            // get the values of the dictionary
+            let users = snapshot.value as! [String : AnyObject]
+            
+            self.containerUsers.removeAll() // Remove all users in the container
+            
+            // Loop the users and get the user are diferent of the current user
+            for(_ , value) in users{
+                
+                // get the user
+                if let uid = value["uid"] as? String{
+                    
+                    if uid != FIRAuth.auth()?.currentUser?.uid{
+                        
+                        let userToShow = User()
+                        
+                        // get the values of the user's dictionary
+                        if let userName = value["full-name"] as? String,
+                            let urlPath = value["urlToImage"] as? String{
+                            
+                            userToShow.userFullName = userName
+                            userToShow.imagePath = urlPath
+                            userToShow.userID = uid
+                            
+                            self.containerUsers.append(userToShow)
+                        
+                        }
+                        
+                    
+                    
+                    }
+                    
+                    
+                }
+            }
+            
+            self.tableView.reloadData()
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        })
+        ref.removeAllObservers()
+        
     }
-    */
+    
+    // MARK: - IBActions
+    @IBAction func logOutPressed(_ sender: Any) {
+    }
 
+}
+
+// MARK: - UITableViewDataSource
+extension UserVC : UITableViewDataSource{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.containerUsers.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let user : User = self.containerUsers[indexPath.row]
+        
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: identifierCell, for: indexPath) as! UserCell
+        
+        // Configure custom cell
+        cell.configureUserCell(with: user)
+        
+        return cell
+        
+    }
+
+
+}
+
+
+// MARK: - UITableViewDelegate
+extension UserVC : UITableViewDelegate{
+    
 }
