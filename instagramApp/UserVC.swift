@@ -16,6 +16,8 @@ class UserVC: UIViewController {
     var containerUsers = [User]()
     
     let identifierCell = "Cell"
+    var isFollower : Bool!
+
     
     
     
@@ -116,5 +118,60 @@ extension UserVC : UITableViewDataSource{
 
 // MARK: - UITableViewDelegate
 extension UserVC : UITableViewDelegate{
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let ref = FIRDatabase.database().reference()  // root reference
+        
+        let key = ref.child("users").childByAutoId().key  // automatic key created in the "user" child ref
+        
+        isFollower = false  // somebody is following someone = false
+        
+        
+        // track the child reference :  followind child reference in the user ref
+        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let following = snapshot.value as? [String : AnyObject]{
+                
+                for(ke, value) in following{
+                    // the user selected in the tableview from the current user is created in the following ref
+                    if value as! String == self.containerUsers[indexPath.row].userID{
+                        
+                        self.isFollower = true
+                        
+                        ref.child("users").child(uid).child("following/\(ke)").removeValue()
+                        ref.child("users").child(self.containerUsers[indexPath.row].userID).child("followers/\(ke)").removeValue()
+                        
+                        self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
+                    }
+                    
+                }
+            
+            }
+            
+            if !self.isFollower{
+                
+                let following = ["following/\(key)" : self.containerUsers[indexPath.row].userID as String]
+                let followers = ["followers/\(key)" : uid]
+                
+                ref.child("users").child(uid).updateChildValues(following)
+                ref.child("users").child(self.containerUsers[indexPath.row].userID).updateChildValues(followers)
+                
+                self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                
+            }
+
+        
+        })
+        ref.removeAllObservers()
+        
+        
+        
+        
+        
+    }
     
 }
