@@ -107,8 +107,35 @@ extension UserVC : UITableViewDataSource{
         
         // Configure custom cell
         cell.configureUserCell(with: user)
+        checkFollowingUser(with: indexPath)  //Track and check wich users are following by the current user
         
         return cell
+        
+    }
+    
+    func checkFollowingUser(with indexPath : IndexPath){
+        
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        let ref = FIRDatabase.database().reference()  // root reference
+        
+        // track the child reference :  followind child reference in the user ref
+        ref.child("users").child(uid).child("following").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let following = snapshot.value as? [String : AnyObject]{
+                
+                for(_ , value) in following{
+                    // the user selected in the tableview from the current user is created in the following ref
+                    if value as! String == self.containerUsers[indexPath.row].userID{
+                        
+                        self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+                    }
+                    
+                }
+                
+            }
+            
+        })
+        ref.removeAllObservers()
         
     }
 
