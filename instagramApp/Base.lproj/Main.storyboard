@@ -221,6 +221,9 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NoY-dG-EbJ">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <segue destination="HVn-VP-VlU" kind="show" id="zkj-1c-ghS"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -248,10 +251,10 @@
             </objects>
             <point key="canvasLocation" x="1447.2" y="131.78410794602701"/>
         </scene>
-        <!--View Controller-->
+        <!--UploadVC-->
         <scene sceneID="8cC-7C-C2k">
             <objects>
-                <viewController id="HVn-VP-VlU" sceneMemberID="viewController">
+                <viewController id="HVn-VP-VlU" customClass="UploadVC" customModule="instagramApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i9C-Uy-tDb"/>
                         <viewControllerLayoutGuide type="bottom" id="cQ8-ZR-kQ6"/>
@@ -277,6 +280,9 @@
                                     <navigationItem title="Upload Image" id="ZhG-zm-u2O">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="ITs-ng-yDO">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <segue destination="c2W-bJ-idx" kind="show" action="showDetailViewController:sender:" id="JzJ-KJ-9g9"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -288,14 +294,20 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sVq-WF-Fzs">
-                                <rect key="frame" x="158" y="134" width="89" height="30"/>
+                                <rect key="frame" x="128" y="134" width="119" height="30"/>
                                 <state key="normal" title="Select Image"/>
+                                <connections>
+                                    <action selector="selectedPressed:" destination="HVn-VP-VlU" eventType="touchUpInside" id="rAC-U1-jh2"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVM-1r-JFp">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kVM-1r-JFp">
                                 <rect key="frame" x="133" y="263" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="postPressed:" destination="HVn-VP-VlU" eventType="touchUpInside" id="9bC-av-K1I"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -307,12 +319,18 @@
                             <constraint firstAttribute="trailing" secondItem="fV1-47-lp9" secondAttribute="trailing" id="avb-QN-A8Y"/>
                             <constraint firstItem="fV1-47-lp9" firstAttribute="top" secondItem="3pM-6Y-hgs" secondAttribute="top" id="ddh-x6-myh"/>
                             <constraint firstItem="Q9P-oV-fml" firstAttribute="leading" secondItem="3pM-6Y-hgs" secondAttribute="leadingMargin" id="g51-sk-2Ov"/>
+                            <constraint firstItem="sVq-WF-Fzs" firstAttribute="centerX" secondItem="3pM-6Y-hgs" secondAttribute="centerX" id="nLj-ts-8F3"/>
                             <constraint firstItem="Q9P-oV-fml" firstAttribute="leading" secondItem="sVq-WF-Fzs" secondAttribute="trailing" constant="-231" id="ppj-lM-ODn"/>
                             <constraint firstItem="fV1-47-lp9" firstAttribute="leading" secondItem="3pM-6Y-hgs" secondAttribute="leading" id="sPd-VF-C9g"/>
                             <constraint firstAttribute="trailing" secondItem="qHM-Kb-wax" secondAttribute="trailing" id="tPU-0C-3bP"/>
                             <constraint firstItem="qHM-Kb-wax" firstAttribute="leading" secondItem="3pM-6Y-hgs" secondAttribute="leading" id="y2l-Zm-CAQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="postBtn" destination="kVM-1r-JFp" id="pgz-fI-EkQ"/>
+                        <outlet property="postImageView" destination="Q9P-oV-fml" id="ljK-AB-UNF"/>
+                        <outlet property="selectedImageBtn" destination="sVq-WF-Fzs" id="Uim-fe-UAn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bv6-e7-Q1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
