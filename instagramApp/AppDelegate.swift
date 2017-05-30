@@ -13,6 +13,44 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var activityIdc = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    var container : UIView!
+    
+    
+    // access to the methods of the appDelegate Class
+    class func instance() -> AppDelegate{
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func showActivityIndicator() {
+        
+        if let window = window{
+            
+            // container of the activity indicator
+            container = UIView()
+            container.frame = window.frame
+            container.center = window.center
+            container.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            
+            activityIdc.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            activityIdc.hidesWhenStopped = true
+            activityIdc.center = CGPoint(x: container.frame.size.width / 2, y: container.frame.size.height / 2)
+            
+            // add in the view
+            container.addSubview(activityIdc)
+            window.addSubview(container)
+            
+            activityIdc.startAnimating()
+            
+        }
+    }
+    
+    func dismissActivityIndicator(){
+        
+        if let _ = window{
+            container.removeFromSuperview()
+        }
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
