@@ -27,4 +27,14 @@ class PostCVCell: UICollectionViewCell {
         
     }
     
+    
+    func configureCell(with post : Post) {
+        
+        self.postImageView.downloadImageFrom(FirebasePath: post.pathImage)
+        self.authorLbl.text = post.author
+        self.likesLbl.text =  "\(post.likes!) likes"
+        
+    }
+    
+    
 }

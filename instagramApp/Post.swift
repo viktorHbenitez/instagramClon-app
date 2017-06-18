@@ -12,7 +12,7 @@ import UIKit
 class Post: NSObject {
     
     var author : String!
-    var likes : String!
+    var likes : Int!
     var pathImage : String!
     var userID : String!
     var postID : String!
